@@ -9,22 +9,26 @@ import org.jlleitschuh.gradle.ktlint.KtlintPlugin
 import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 
 plugins {
+    // :app
     alias(libs.plugins.androidApplication).apply(false)
-    alias(libs.plugins.androidLibrary).apply(false)
     alias(libs.plugins.kotlinAndroid).apply(false)
+    // :shared-*
     alias(libs.plugins.kotlinMultiplatform).apply(false)
-    alias(libs.plugins.compose.multiplatform).apply(false)
-    alias(libs.plugins.compose.compiler).apply(false)
+    alias(libs.plugins.androidLibrary).apply(false)
     alias(libs.plugins.binaryCompatibilityValidator).apply(false)
     alias(libs.plugins.dokka).apply(false)
-    alias(libs.plugins.dependency.guard).apply(false)
-    alias(libs.plugins.kover)
-    alias(libs.plugins.ktlint)
-    alias(libs.plugins.versions)
-    alias(libs.plugins.build.logic.root).apply(false)
     alias(libs.plugins.build.logic.library.kmp).apply(false)
     alias(libs.plugins.build.logic.library.android).apply(false)
     alias(libs.plugins.build.logic.library.publishing).apply(false)
+    // :app-shared / :shared-ui if present
+    alias(libs.plugins.compose.multiplatform).apply(false)
+    alias(libs.plugins.compose.compiler).apply(false)
+    // applied automatically to all :shared-* modules
+    alias(libs.plugins.dependency.guard).apply(false)
+    // applied to all modules
+    alias(libs.plugins.kover)
+    alias(libs.plugins.ktlint)
+    alias(libs.plugins.versions)
 }
 
 apply(plugin = libs.plugins.build.logic.root.get().pluginId)

@@ -19,12 +19,11 @@ kotlin {
         .forEach { target ->
             NativeBuildType.DEFAULT_BUILD_TYPES.forEach { buildType ->
                 target.binaries.getFramework(buildType).apply {
-                    export(projects.sharedCore)
-                    export(projects.sharedData)
-                    export(projects.sharedDi)
-                    export(projects.sharedDomain)
-                    export(projects.sharedNetwork)
-                    export(projects.sharedUi)
+                    rootProject.allprojects.forEach { project ->
+                        if (project.name.startsWith("shared-")) {
+                            export(project)
+                        }
+                    }
                 }
             }
         }
@@ -32,12 +31,11 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                api(projects.sharedCore)
-                api(projects.sharedData)
-                api(projects.sharedDi)
-                api(projects.sharedDomain)
-                api(projects.sharedNetwork)
-                api(projects.sharedUi)
+                rootProject.allprojects.forEach { project ->
+                    if (project.name.startsWith("shared-")) {
+                        api(project)
+                    }
+                }
             }
         }
         commonTest {

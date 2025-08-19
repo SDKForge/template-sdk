@@ -24,5 +24,5 @@ kotlin {
 }
 
 android {
-    namespace = "dev.sdkforge.template.data"
+    namespace = "dev.sdkforge.template.<module name here>"
 }

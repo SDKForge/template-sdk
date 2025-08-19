@@ -39,10 +39,7 @@ include(":app-android")
 include(":app-shared")
 include(":shared")
 include(":shared-core")
-include(":shared-data")
-include(":shared-di")
-include(":shared-domain")
-include(":shared-network")
-include(":shared-ui")
 
 include(":internal-ktlint")
+// uncomment if it's needed for development
+// include(":shared-template")
