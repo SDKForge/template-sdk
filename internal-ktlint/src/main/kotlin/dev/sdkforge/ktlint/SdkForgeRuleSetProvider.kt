@@ -11,6 +11,6 @@ class SdkForgeRuleSetProvider : RuleSetProviderV3(RuleSetId(SDKFORGE_RULE_SET_ID
         RuleProvider { NoTemplateImportRule() },
         RuleProvider { NoTemplatePackageRule() },
         RuleProvider { NoDataImportInDomainRule() },
-        RuleProvider { NoUiImportInDataRule() }
+        RuleProvider { NoUiImportInDataRule() },
     )
 }

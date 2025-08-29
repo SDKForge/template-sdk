@@ -9,15 +9,17 @@ import org.jetbrains.kotlin.psi.KtImportDirective
 import org.jetbrains.kotlin.psi.KtPackageDirective
 import org.jetbrains.kotlin.psi.stubs.elements.KtStubElementTypes
 
-//TODO could all 'import in package' rules be made into a single rule with an arguments coming from rule constructor?
-class NoUiImportInDataRule() : Rule(
-    ruleId = RuleId("$SDKFORGE_RULE_SET_ID:no-ui-import-in-data"),
-    about = About(
-        maintainer = "azazellj",
-        repositoryUrl = "https://github.com/SDKForge/template-sdk",
-        issueTrackerUrl = "https://github.com/SDKForge/template-sdk/issues",
+// TODO could all 'import in package' rules be made into a single rule with an arguments coming from rule constructor?
+class NoUiImportInDataRule :
+    Rule(
+        ruleId = RuleId("$SDKFORGE_RULE_SET_ID:no-ui-import-in-data"),
+        about = About(
+            maintainer = "azazellj",
+            repositoryUrl = "https://github.com/SDKForge/template-sdk",
+            issueTrackerUrl = "https://github.com/SDKForge/template-sdk/issues",
+        ),
     ),
-), RuleAutocorrectApproveHandler {
+    RuleAutocorrectApproveHandler {
     override fun beforeVisitChildNodes(
         node: ASTNode,
         emit: (offset: Int, errorMessage: String, canBeAutoCorrected: Boolean) -> AutocorrectDecision,

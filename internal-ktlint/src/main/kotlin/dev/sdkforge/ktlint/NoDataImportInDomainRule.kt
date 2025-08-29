@@ -9,15 +9,17 @@ import org.jetbrains.kotlin.psi.KtImportDirective
 import org.jetbrains.kotlin.psi.KtPackageDirective
 import org.jetbrains.kotlin.psi.stubs.elements.KtStubElementTypes
 
-//TODO could all 'import in package' rules be made into a single rule with an arguments coming from rule constructor?
-class NoDataImportInDomainRule() : Rule(
-    ruleId = RuleId("$SDKFORGE_RULE_SET_ID:no-data-import-in-domain"),
-    about = About(
-        maintainer = "azazellj",
-        repositoryUrl = "https://github.com/SDKForge/template-sdk",
-        issueTrackerUrl = "https://github.com/SDKForge/template-sdk/issues",
+// TODO could all 'import in package' rules be made into a single rule with an arguments coming from rule constructor?
+class NoDataImportInDomainRule :
+    Rule(
+        ruleId = RuleId("$SDKFORGE_RULE_SET_ID:no-data-import-in-domain"),
+        about = About(
+            maintainer = "azazellj",
+            repositoryUrl = "https://github.com/SDKForge/template-sdk",
+            issueTrackerUrl = "https://github.com/SDKForge/template-sdk/issues",
+        ),
     ),
-), RuleAutocorrectApproveHandler {
+    RuleAutocorrectApproveHandler {
     override fun beforeVisitChildNodes(
         node: ASTNode,
         emit: (offset: Int, errorMessage: String, canBeAutoCorrected: Boolean) -> AutocorrectDecision,
@@ -49,6 +51,7 @@ class NoDataImportInDomainRule() : Rule(
         private const val DATA_MODULE_NAME = "data"
         private const val DOMAIN_MODULE_NAME = "domain"
 
-        val RULE_VIOLATION_MESSAGE = "Importing: $currentImportPath. $DATA_MODULE_NAME module import is not allowed in $DOMAIN_MODULE_NAME module"
+        val RULE_VIOLATION_MESSAGE =
+            "Importing: $currentImportPath. $DATA_MODULE_NAME module import is not allowed in $DOMAIN_MODULE_NAME module"
     }
 }
