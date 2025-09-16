@@ -46,4 +46,12 @@ internal expect class PlatformCameraView {
      * properly clean up camera resources and stop the preview.
      */
     internal fun onRelease()
+
+    internal fun toggleFlash()
+
+    internal fun isFlashIsOn(): Boolean
+
+    internal fun toggleActiveCamera()
+
+    internal fun isBackCameraActive(): Boolean
 }

@@ -169,4 +169,20 @@ internal actual class PlatformCameraView(
     internal actual fun onRelease() {
         controller.unbind()
     }
+
+    internal actual fun toggleFlash() {
+        TODO("NOT IMPLEMENTED YET")
+    }
+
+    internal actual fun isFlashIsOn(): Boolean {
+        TODO("NOT IMPLEMENTED YET")
+    }
+
+    internal actual fun toggleActiveCamera() {
+        TODO("NOT IMPLEMENTED YET")
+    }
+
+    internal actual fun isBackCameraActive(): Boolean {
+        TODO("NOT IMPLEMENTED YET")
+    }
 }

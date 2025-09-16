@@ -138,6 +138,22 @@ internal abstract class NativeCameraController(
     override fun onRelease() {
         platformCameraView.onRelease()
     }
+
+    override fun toggleFlash() {
+        platformCameraView.toggleFlash()
+    }
+
+    override fun isFlashIsOn(): Boolean {
+        return platformCameraView.isFlashIsOn()
+    }
+
+    override fun toggleActiveCamera() {
+        platformCameraView.toggleActiveCamera()
+    }
+
+    override fun isBackCameraActive(): Boolean {
+        return platformCameraView.isBackCameraActive()
+    }
 }
 
 /**
@@ -195,4 +211,12 @@ abstract class CameraController {
      * Implementations should properly clean up camera resources.
      */
     internal abstract fun onRelease()
+
+    internal abstract fun toggleFlash()
+
+    internal abstract fun isFlashIsOn(): Boolean
+
+    internal abstract fun toggleActiveCamera()
+
+    internal abstract fun isBackCameraActive(): Boolean
 }
