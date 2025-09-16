@@ -208,9 +208,9 @@ abstract class CameraController {
      */
     internal abstract fun onRelease()
 
-    internal abstract fun toggleFlash()
+    abstract fun toggleFlash()
 
-    internal abstract fun isFlashIsOn(): Boolean
+    abstract fun isFlashIsOn(): Boolean
 
-    internal abstract fun toggleActiveCamera()
+    abstract fun toggleActiveCamera()
 }
