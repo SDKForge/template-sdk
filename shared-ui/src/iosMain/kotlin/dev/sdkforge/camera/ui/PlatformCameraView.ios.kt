@@ -11,9 +11,13 @@ import platform.AVFoundation.AVCaptureAutoFocusRangeRestrictionNear
 import platform.AVFoundation.AVCaptureConnection
 import platform.AVFoundation.AVCaptureDevice
 import platform.AVFoundation.AVCaptureDeviceInput
+import platform.AVFoundation.AVCaptureDevicePosition
 import platform.AVFoundation.AVCaptureDevicePositionBack
 import platform.AVFoundation.AVCaptureDevicePositionFront
+import platform.AVFoundation.AVCaptureDevicePositionUnspecified
+import platform.AVFoundation.AVCaptureDeviceType
 import platform.AVFoundation.AVCaptureDeviceTypeBuiltInTripleCamera
+import platform.AVFoundation.AVCaptureInput
 import platform.AVFoundation.AVCaptureMetadataOutput
 import platform.AVFoundation.AVCaptureMetadataOutputObjectsDelegateProtocol
 import platform.AVFoundation.AVCaptureOutput
@@ -30,7 +34,10 @@ import platform.AVFoundation.automaticallyEnablesLowLightBoostWhenAvailable
 import platform.AVFoundation.defaultDeviceWithDeviceType
 import platform.AVFoundation.isAutoFocusRangeRestrictionSupported
 import platform.AVFoundation.isLowLightBoostSupported
+import platform.AVFoundation.isTorchAvailable
 import platform.AVFoundation.isTorchModeSupported
+import platform.AVFoundation.position
+import platform.AVFoundation.setFlashMode
 import platform.AVFoundation.torchMode
 import platform.CoreGraphics.CGRectZero
 import platform.QuartzCore.CALayer
@@ -163,7 +170,6 @@ internal actual class PlatformCameraView(
         preferFrontCamera: Boolean,
     ): AVCaptureDevice? {
         val preferredPosition = if (preferFrontCamera) AVCaptureDevicePositionFront else AVCaptureDevicePositionBack
-
         return AVCaptureDevice.defaultDeviceWithDeviceType(
             deviceType = AVCaptureDeviceTypeBuiltInTripleCamera,
             mediaType = AVMediaTypeVideo,
@@ -267,18 +273,46 @@ internal actual class PlatformCameraView(
     }
 
     internal actual fun toggleFlash() {
-        TODO("NOT IMPLEMENTED YET")
+        val device = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
+        if (device?.isTorchAvailable() == true) {
+            val targetMode = when (device.torchMode) {
+                AVCaptureTorchModeOn -> AVCaptureTorchModeOff
+                AVCaptureTorchModeOff -> AVCaptureTorchModeOn
+                else -> AVCaptureTorchModeAuto
+            }
+            device.setFlashMode(targetMode)
+        }
     }
 
     internal actual fun isFlashIsOn(): Boolean {
-        TODO("NOT IMPLEMENTED YET")
+        val device = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
+        var isFlashOn = false
+        if (device?.isTorchAvailable() == true) {
+            isFlashOn = device.torchMode == AVCaptureTorchModeOn
+        }
+        return isFlashOn
     }
 
     internal actual fun toggleActiveCamera() {
-        TODO("NOT IMPLEMENTED YET")
-    }
+        val frontCameraDeviceInput = AVCaptureDevice.defaultDeviceWithDeviceType(
+            AVCaptureDeviceTypeBuiltInTripleCamera,
+            AVMediaTypeVideo,
+            AVCaptureDevicePositionFront
+        ) as? AVCaptureDeviceInput
+        val backCameraDeviceInput = AVCaptureDevice.defaultDeviceWithDeviceType(
+            AVCaptureDeviceTypeBuiltInTripleCamera,
+            AVMediaTypeVideo,
+            AVCaptureDevicePositionBack
+        ) as? AVCaptureDeviceInput
 
-    internal actual fun isBackCameraActive(): Boolean {
-        TODO("NOT IMPLEMENTED YET")
+        captureSession.beginConfiguration()
+        if (captureSession.inputs.contains(frontCameraDeviceInput)) {
+            frontCameraDeviceInput?.let { captureSession.removeInput(it) }
+            backCameraDeviceInput?.let { captureSession.addInput(it) }
+        } else if (captureSession.inputs.contains(backCameraDeviceInput)) {
+            backCameraDeviceInput?.let { captureSession.removeInput(it) }
+            frontCameraDeviceInput?.let { captureSession.addInput(it) }
+        }
+        captureSession.commitConfiguration()
     }
 }

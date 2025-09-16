@@ -5,6 +5,7 @@ import android.graphics.Color
 import androidx.annotation.OptIn
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ExperimentalGetImage
+import androidx.camera.core.TorchState
 import androidx.camera.view.LifecycleCameraController
 import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
@@ -171,18 +172,20 @@ internal actual class PlatformCameraView(
     }
 
     internal actual fun toggleFlash() {
-        TODO("NOT IMPLEMENTED YET")
+        val currentTorchState = controller.torchState.value
+        controller.enableTorch(currentTorchState != TorchState.ON)
     }
 
     internal actual fun isFlashIsOn(): Boolean {
-        TODO("NOT IMPLEMENTED YET")
+        return controller.torchState.value == TorchState.ON
     }
 
     internal actual fun toggleActiveCamera() {
-        TODO("NOT IMPLEMENTED YET")
-    }
-
-    internal actual fun isBackCameraActive(): Boolean {
-        TODO("NOT IMPLEMENTED YET")
+        val currentCameraSelector = controller.cameraSelector
+        controller.cameraSelector = when (currentCameraSelector) {
+            CameraSelector.DEFAULT_BACK_CAMERA -> CameraSelector.DEFAULT_FRONT_CAMERA
+            CameraSelector.DEFAULT_FRONT_CAMERA -> CameraSelector.DEFAULT_BACK_CAMERA
+            else -> CameraSelector.DEFAULT_BACK_CAMERA
+        }
     }
 }

@@ -52,6 +52,4 @@ internal expect class PlatformCameraView {
     internal fun isFlashIsOn(): Boolean
 
     internal fun toggleActiveCamera()
-
-    internal fun isBackCameraActive(): Boolean
 }
