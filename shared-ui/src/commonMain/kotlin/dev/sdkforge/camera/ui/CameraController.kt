@@ -8,6 +8,7 @@ import dev.sdkforge.camera.domain.CameraConfig
 import dev.sdkforge.camera.domain.ScanResult
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
 
 /**
  * Platform-specific implementation of the native camera controller.
@@ -59,7 +60,7 @@ internal abstract class NativeCameraController(
      * This mutable shared flow is used internally to emit scan results
      * and can be shared with multiple collectors.
      */
-    protected val initialScannedResults: MutableSharedFlow<ScanResult> = MutableSharedFlow()
+    protected val initialScannedResults: MutableSharedFlow<ScanResult> = MutableSharedFlow(replay = 1)
 
     /**
      * Public flow of scanned results.
@@ -67,7 +68,7 @@ internal abstract class NativeCameraController(
      * This flow emits [ScanResult] objects whenever a barcode is successfully
      * scanned and decoded.
      */
-    override val scannedResults: Flow<ScanResult> = initialScannedResults
+    override val scannedResults: SharedFlow<ScanResult> = initialScannedResults
 
     /**
      * The initial camera state implementation.
