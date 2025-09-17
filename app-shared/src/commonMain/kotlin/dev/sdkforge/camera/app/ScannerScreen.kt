@@ -2,18 +2,25 @@ package dev.sdkforge.camera.app
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FlashOff
 import androidx.compose.material.icons.filled.FlashOn
 import androidx.compose.material.icons.filled.FlipCameraAndroid
+import androidx.compose.material.icons.filled.History
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -22,28 +29,35 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import dev.sdkforge.camera.domain.ScanResult
 import dev.sdkforge.camera.ui.CameraController
 import dev.sdkforge.camera.ui.CameraView
-import dev.sdkforge.camera.ui.rememberCameraController
 
 @Composable
 fun ScannerScreen(
+    cameraController: CameraController,
+    scans: Set<ScanResult>,
     modifier: Modifier = Modifier,
 ) {
-    val cameraController = rememberCameraController()
+    var isHistoryDialogShown by remember { mutableStateOf(false) }
 
-    ApplicationTheme {
-        Scaffold(
+    Scaffold(
+        modifier = Modifier.fillMaxSize(),
+    ) { innerPadding ->
+        CameraView(
+            cameraController = cameraController,
             modifier = Modifier.fillMaxSize(),
-        ) { innerPadding ->
-            CameraView(
-                cameraController = cameraController,
-                modifier = Modifier.fillMaxSize(),
-            )
-            ButtonsOverlay(
-                controller = cameraController,
-                modifier = modifier.padding(top = innerPadding.calculateTopPadding()),
-            )
+        )
+        ButtonsOverlay(
+            controller = cameraController,
+            modifier = modifier.padding(top = innerPadding.calculateTopPadding()),
+            { isHistoryDialogShown = !isHistoryDialogShown },
+        )
+        ScansHistoryDialog(
+            showDialog = isHistoryDialogShown,
+            scans = scans,
+        ) {
+            isHistoryDialogShown = false
         }
     }
 }
@@ -52,28 +66,80 @@ fun ScannerScreen(
 fun ButtonsOverlay(
     controller: CameraController,
     modifier: Modifier = Modifier,
+    onHistoryClicked: () -> Unit,
 ) {
     var isFlashOn by remember { mutableStateOf(false) }
     val targetIcon = if (isFlashOn) Icons.Default.FlashOff else Icons.Default.FlashOn
-    Row(
-        horizontalArrangement = Arrangement.SpaceEvenly,
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = modifier.fillMaxWidth().padding(8.dp),
-    ) {
-        Icon(
-            imageVector = targetIcon,
-            contentDescription = "Flash toggle",
-            modifier = Modifier.clickable {
-                controller.toggleFlash()
-                isFlashOn = controller.isFlashIsOn()
+
+    Column {
+        Row(
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            verticalAlignment = Alignment.Top,
+            modifier = modifier.fillMaxWidth(),
+        ) {
+            Icon(
+                imageVector = Icons.Default.History,
+                contentDescription = "Show scans history",
+                modifier = Modifier.clickable {
+                    onHistoryClicked.invoke()
+                },
+            )
+            Icon(
+                imageVector = targetIcon,
+                contentDescription = "Flash toggle",
+                modifier = Modifier.clickable {
+                    controller.toggleFlash()
+                    isFlashOn = controller.isFlashIsOn()
+                },
+            )
+            Icon(
+                imageVector = Icons.Default.FlipCameraAndroid,
+                contentDescription = "Flip between front and back active cameras",
+                modifier = Modifier.clickable {
+                    controller.toggleActiveCamera()
+                },
+            )
+        }
+    }
+}
+
+@Composable
+@OptIn(ExperimentalMaterial3Api::class)
+fun ScansHistoryDialog(
+    showDialog: Boolean,
+    scans: Set<ScanResult>,
+    onDismiss: () -> Unit,
+) {
+    val sheetState = rememberModalBottomSheetState()
+    if (showDialog) {
+        ModalBottomSheet(
+            onDismissRequest = {
+                onDismiss.invoke()
             },
-        )
-        Icon(
-            imageVector = Icons.Default.FlipCameraAndroid,
-            contentDescription = "Flip between front and back active cameras",
-            modifier = Modifier.clickable {
-                controller.toggleActiveCamera()
-            },
-        )
+            sheetState = sheetState,
+            modifier = Modifier.fillMaxSize()
+        ) {
+            if (scans.isEmpty()) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(
+                        text = "Scans history is empty",
+                    )
+                }
+            } else {
+                LazyColumn(
+                    modifier = Modifier.padding(8.dp).fillMaxWidth(),
+                ) {
+                    itemsIndexed(items = scans.toList()) { index, item ->
+                        Text(
+                            text = "${index + 1}. ${item.value}",
+                            modifier = Modifier.padding(top = 12.dp),
+                        )
+                    }
+                }
+            }
+        }
     }
 }

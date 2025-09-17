@@ -5,20 +5,22 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import dev.sdkforge.camera.domain.ScanResult
 import dev.sdkforge.camera.ui.CameraController
-import dev.sdkforge.camera.ui.CameraView
 
 @Composable
 fun App(
     cameraController: CameraController,
+    scans: Set<ScanResult>,
     modifier: Modifier = Modifier,
 ) = ApplicationTheme {
     Surface(
         modifier = modifier,
         color = MaterialTheme.colorScheme.background,
     ) {
-        CameraView(
+        ScannerScreen(
             cameraController = cameraController,
+            scans = scans,
             modifier = Modifier.fillMaxSize(),
         )
     }
