@@ -272,6 +272,11 @@ internal actual class PlatformCameraView(
         captureSession.stopRunning()
     }
 
+    /**
+     * Changes state of camera flash to opposite of current.
+     *
+     * Provides control of flash in torch mode only.
+     */
     internal actual fun toggleFlash() {
         val device = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
         if (device?.isTorchAvailable() == true) {
@@ -284,6 +289,9 @@ internal actual class PlatformCameraView(
         }
     }
 
+    /**
+     * Check for flash is currently on in torch mode.
+     */
     internal actual fun isFlashIsOn(): Boolean {
         val device = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
         var isFlashOn = false
@@ -293,6 +301,11 @@ internal actual class PlatformCameraView(
         return isFlashOn
     }
 
+    /**
+     * Changes what camera is active at the moment.
+     *
+     * Provides control of what camera, frontal or back, is currently active.
+     */
     internal actual fun toggleActiveCamera() {
         val frontCameraDeviceInput = AVCaptureDevice.defaultDeviceWithDeviceType(
             AVCaptureDeviceTypeBuiltInTripleCamera,

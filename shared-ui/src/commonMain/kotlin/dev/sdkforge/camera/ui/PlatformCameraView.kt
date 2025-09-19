@@ -47,9 +47,22 @@ internal expect class PlatformCameraView {
      */
     internal fun onRelease()
 
+    /**
+     * Changes state of camera flash to opposite of current.
+     *
+     * Provides control of flash in torch mode only.
+     */
     internal fun toggleFlash()
 
+    /**
+     * Check for flash is currently on in torch mode.
+     */
     internal fun isFlashIsOn(): Boolean
 
+    /**
+     * Changes what camera is active at the moment.
+     *
+     * Provides control of what camera, frontal or back, is currently active.
+     */
     internal fun toggleActiveCamera()
 }

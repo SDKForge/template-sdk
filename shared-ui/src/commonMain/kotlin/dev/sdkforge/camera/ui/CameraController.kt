@@ -209,9 +209,22 @@ abstract class CameraController {
      */
     internal abstract fun onRelease()
 
+    /**
+     * Changes state of camera flash to opposite of current.
+     *
+     * Provides control of flash in torch mode only.
+     */
     abstract fun toggleFlash()
 
+    /**
+     * Check for flash is currently on in torch mode.
+     */
     abstract fun isFlashIsOn(): Boolean
 
+    /**
+     * Changes what camera is active at the moment.
+     *
+     * Provides control of what camera, frontal or back, is currently active.
+     */
     abstract fun toggleActiveCamera()
 }
