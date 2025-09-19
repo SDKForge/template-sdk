@@ -16,6 +16,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import dev.sdkforge.camera.app.App
+import dev.sdkforge.camera.app.AppConstants
 import dev.sdkforge.camera.domain.CameraConfig
 import dev.sdkforge.camera.domain.Facing
 import dev.sdkforge.camera.domain.Format
@@ -66,13 +67,13 @@ class MainActivity : ComponentActivity() {
             LaunchedEffect(Unit) {
                 cameraController.scannedResults.collect { scanResult ->
                     if (scans.contains(scanResult)) {
-                        toast("Already scanned, checked scans history")
+                        toast("${AppConstants.SUCCESS_TITLE} - ${AppConstants.ALREADY_SCANNED_MESSAGE}")
                     } else {
-                        if (scans.size >= 5) {
+                        if (scans.size == AppConstants.HISTORY_SCANS_MAX_LENGTH) {
                             scans.remove(scans.first())
                         }
                         scans.add(scanResult)
-                        toast("${scanResult.format.name}; value = ${scanResult.value}")
+                        toast("${AppConstants.SUCCESS_TITLE} - ${AppConstants.SCANNED_VALUE} ${scanResult.value}")
                     }
                 }
             }

@@ -25,3 +25,11 @@ fun App(
         )
     }
 }
+
+object AppConstants {
+    const val HISTORY_SCANS_MAX_LENGTH = 5
+    const val ERROR_TITLE = "Error"
+    const val SUCCESS_TITLE = "Success"
+    const val ALREADY_SCANNED_MESSAGE = "Already scanned, check scans history"
+    const val SCANNED_VALUE = "Scanned value:"
+}
