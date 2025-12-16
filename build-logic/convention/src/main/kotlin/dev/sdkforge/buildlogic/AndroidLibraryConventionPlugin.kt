@@ -123,9 +123,9 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
  * Sets the compile SDK to 36 (Android 14) and minimum SDK to 21 (Android 5.0).
  */
 private fun KotlinMultiplatformExtension.configureSDK() = androidLibrary {
-    compileSdk = 36 // Android 14 (API level 36)
+    compileSdk = 36 // Android 16 (API level 36)
 
-    minSdk = 21     // Android 5.0 Lollipop (API level 21)
+    minSdk = 23     // Android 6.0 Marshmallow (API level 23)
 }
 
 /**
