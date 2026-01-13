@@ -78,7 +78,7 @@ dependencies {
 
 ### Prerequisites
 
-- **Java Development Kit (JDK)**: Version 17 or higher
+- **Java Development Kit (JDK)**: Version 21 or higher
 - **Android Studio**: Latest stable version (for Android development)
 - **Xcode**: Latest stable version (for iOS development, macOS only)
 - **Kotlin**: Version 2.2.20 or higher

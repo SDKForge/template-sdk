@@ -20,7 +20,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
  *
  * - **Android Library Setup**: Automatically applies the Android library plugin
  * - **SDK Configuration**: Sets compile and target SDK versions
- * - **Java Compatibility**: Configures Java 17 compatibility
+ * - **Java Compatibility**: Configures Java 21 compatibility
  * - **Kotlin Configuration**: Sets JVM target and compiler options
  * - **Comprehensive Linting**: Full Android lint analysis with multiple report formats
  * - **Multi-format Reports**: HTML, XML, SARIF, and text reports
@@ -43,11 +43,11 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
  * - **Target SDK**: 36 (Android 14)
  *
  * ### Java Configuration
- * - **Source Compatibility**: Java 17
- * - **Target Compatibility**: Java 17
+ * - **Source Compatibility**: Java 21
+ * - **Target Compatibility**: Java 21
  *
  * ### Kotlin Configuration
- * - **JVM Target**: Java 17
+ * - **JVM Target**: Java 21
  * - **Warnings as Errors**: Disabled
  *
  * ## Lint Configuration
@@ -81,7 +81,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
  * - Android Gradle Plugin
  * - Kotlin Android Plugin
  * - Android SDK with API level 36
- * - Java 17 or later
+ * - Java 21 or later
  *
  * ## Reports Location
  *
@@ -131,24 +131,24 @@ private fun KotlinMultiplatformExtension.configureSDK() = androidLibrary {
 /**
  * Configures Java compatibility settings.
  *
- * Sets both source and target compatibility to Java 17, ensuring consistent
+ * Sets both source and target compatibility to Java 21, ensuring consistent
  * bytecode generation and compatibility across different Java versions.
  */
 private fun KotlinMultiplatformExtension.configureJava() = androidLibrary {
     compilerOptions {
-        jvmTarget.set(JvmTarget.JVM_17)
+        jvmTarget.set(JvmTarget.JVM_21)
     }
 }
 
 /**
  * Configures Kotlin compiler options for the project.
  *
- * Sets the JVM target to Java 17 and configures warning handling.
+ * Sets the JVM target to Java 21 and configures warning handling.
  */
 private fun Project.configureKotlin() {
     tasks.withType<KotlinCompile> {
         compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_17)           // Target Java 17 bytecode
+            jvmTarget.set(JvmTarget.JVM_21)           // Target Java 21 bytecode
             allWarningsAsErrors.set(false)            // Don't treat warnings as errors
         }
     }

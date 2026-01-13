@@ -13,14 +13,14 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
  * This plugin provides standardized configuration for KMP libraries, including:
  * - Automatic application of the Kotlin Multiplatform plugin
  * - Compiler options for expect/actual classes
- * - Android target configuration with JVM 17
+ * - Android target configuration with JVM 21
  * - iOS framework configuration for all supported architectures
  *
  * ## Features
  *
  * - **Multiplatform Support**: Enables Kotlin Multiplatform compilation
  * - **Expect/Actual Classes**: Configures compiler for multiplatform class declarations
- * - **Android Target**: Sets up Android compilation with JVM 17 target
+ * - **Android Target**: Sets up Android compilation with JVM 21 target
  * - **iOS Frameworks**: Creates static frameworks for iOS targets
  * - **Architecture Support**: Supports x64, ARM64, and Simulator ARM64
  *
@@ -36,7 +36,7 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
  *
  * ### Android
  * - Automatically applies Kotlin Multiplatform plugin
- * - Configures JVM target to Java 17
+ * - Configures JVM target to Java 21
  * - Integrates with Android build system
  *
  * ### iOS
@@ -48,7 +48,7 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
  *
  * The plugin automatically configures:
  * - `-Xexpect-actual-classes`: Enables expect/actual class declarations
- * - JVM target: Set to Java 17 for Android compilation
+ * - JVM target: Set to Java 21 for Android compilation
  *
  * ## Example Project Structure
  *
@@ -87,7 +87,7 @@ class KMPLibraryConventionPlugin : Plugin<Project> {
                 androidLibrary {
                     compilations.configureEach {
                         compileTaskProvider.configure {
-                            this.compilerOptions.jvmTarget.set(JvmTarget.JVM_17)
+                            this.compilerOptions.jvmTarget.set(JvmTarget.JVM_21)
                         }
                     }
                 }
