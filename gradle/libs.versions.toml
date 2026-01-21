@@ -1,8 +1,8 @@
 [versions]
 agp = "8.13.2"
-mavenPublishGradlePlugin = "0.35.0"
+mavenPublishGradlePlugin = "0.36.0"
 kotlin = "2.3.0"
-compose = "1.10.0"
+compose = "1.10.1"
 composeMultiplatform = "1.10.0"
 compose-material3 = "1.4.0"
 androidx-activityCompose = "1.12.2"
