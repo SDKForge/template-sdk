@@ -1,13 +1,13 @@
+import com.android.build.api.dsl.ApplicationExtension
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 
 plugins {
     alias(libs.plugins.androidApplication)
-    alias(libs.plugins.kotlinAndroid)
     alias(libs.plugins.compose.compiler)
 }
 
-android {
+configure<ApplicationExtension> {
     namespace = "dev.sdkforge.template.android"
     compileSdk = 36
     defaultConfig {

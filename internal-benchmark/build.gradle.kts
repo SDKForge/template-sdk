@@ -1,10 +1,16 @@
+import com.android.build.api.dsl.LibraryExtension
+
 plugins {
-    alias(libs.plugins.kotlinAndroid)
-    alias(libs.plugins.build.logic.library.android)
+    // TODO: benchmark gradle plugin is not AGP 9.0 compatible; remove & uncomment on the update
+    id("com.android.library")
+    // alias(libs.plugins.build.logic.library.android)
     alias(libs.plugins.benchmark)
 }
 
-android {
+configure<LibraryExtension> {
+    // TODO: benchmark gradle plugin is not AGP 9.0 compatible; remove on the update
+    compileSdk = 36 // Android 16 (API level 36)
+
     namespace = "dev.sdkforge.benchmark"
 
     defaultConfig {

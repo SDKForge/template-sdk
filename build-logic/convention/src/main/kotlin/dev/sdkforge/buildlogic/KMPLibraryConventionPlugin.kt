@@ -1,10 +1,8 @@
 package dev.sdkforge.buildlogic
 
-import com.android.build.api.dsl.androidLibrary
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 /**
@@ -82,14 +80,6 @@ class KMPLibraryConventionPlugin : Plugin<Project> {
                     this.freeCompilerArgs.addAll(
                         "-Xexpect-actual-classes",
                     )
-                }
-
-                androidLibrary {
-                    compilations.configureEach {
-                        compileTaskProvider.configure {
-                            this.compilerOptions.jvmTarget.set(JvmTarget.JVM_21)
-                        }
-                    }
                 }
 
                 listOf(

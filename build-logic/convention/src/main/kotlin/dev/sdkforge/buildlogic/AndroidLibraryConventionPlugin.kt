@@ -1,6 +1,6 @@
 package dev.sdkforge.buildlogic
 
-import com.android.build.api.dsl.androidLibrary
+import com.android.build.api.dsl.KotlinMultiplatformAndroidLibraryExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
@@ -41,10 +41,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
  * - **Compile SDK**: 36 (Android 14)
  * - **Minimum SDK**: 21 (Android 5.0 Lollipop)
  * - **Target SDK**: 36 (Android 14)
- *
- * ### Java Configuration
- * - **Source Compatibility**: Java 21
- * - **Target Compatibility**: Java 21
  *
  * ### Kotlin Configuration
  * - **JVM Target**: Java 21
@@ -107,7 +103,6 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
 
             configure<KotlinMultiplatformExtension> {
                 configureSDK()      // Set SDK versions
-                configureJava()     // Configure Java compatibility
                 configureLint()     // Set up lint analysis
             }
 
@@ -122,22 +117,10 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
  *
  * Sets the compile SDK to 36 (Android 14) and minimum SDK to 21 (Android 5.0).
  */
-private fun KotlinMultiplatformExtension.configureSDK() = androidLibrary {
+private fun KotlinMultiplatformExtension.configureSDK() = extensions.configure<KotlinMultiplatformAndroidLibraryExtension> {
     compileSdk = 36 // Android 16 (API level 36)
 
     minSdk = 23     // Android 6.0 Marshmallow (API level 23)
-}
-
-/**
- * Configures Java compatibility settings.
- *
- * Sets both source and target compatibility to Java 21, ensuring consistent
- * bytecode generation and compatibility across different Java versions.
- */
-private fun KotlinMultiplatformExtension.configureJava() = androidLibrary {
-    compilerOptions {
-        jvmTarget.set(JvmTarget.JVM_21)
-    }
 }
 
 /**
@@ -161,7 +144,7 @@ private fun Project.configureKotlin() {
  * and integration with the build process. Includes test sources and dependencies
  * in analysis for thorough code quality assessment.
  */
-private fun KotlinMultiplatformExtension.configureLint() = androidLibrary {
+private fun KotlinMultiplatformExtension.configureLint() = extensions.configure<KotlinMultiplatformAndroidLibraryExtension> {
     lint {
         // Analysis behavior configuration
         quiet = false                    // Show analysis progress
