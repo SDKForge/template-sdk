@@ -50,4 +50,5 @@ build-logic-ktlint = { id = "dev.sdkforge.buildlogic.ktlint" }
 build-logic-library-kmp = { id = "dev.sdkforge.buildlogic.library.kmp" }
 build-logic-library-android = { id = "dev.sdkforge.buildlogic.library.android" }
 build-logic-library-publishing = { id = "dev.sdkforge.buildlogic.library.publishing" }
+build-logic-binary-validation = { id = "dev.sdkforge.buildlogic.binary.validation" }
 benchmark = { id = "androidx.benchmark", version.ref = "benchmark" }

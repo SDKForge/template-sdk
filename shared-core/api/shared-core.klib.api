@@ -1,0 +1,17 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64, iosX64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <dev.sdkforge.template:shared-core>
+abstract interface dev.sdkforge.template.core/Platform { // dev.sdkforge.template.core/Platform|null[0]
+    abstract val name // dev.sdkforge.template.core/Platform.name|{}name[0]
+        abstract fun <get-name>(): kotlin/String // dev.sdkforge.template.core/Platform.name.<get-name>|<get-name>(){}[0]
+    abstract val version // dev.sdkforge.template.core/Platform.version|{}version[0]
+        abstract fun <get-version>(): kotlin/String // dev.sdkforge.template.core/Platform.version.<get-version>|<get-version>(){}[0]
+}
+
+final val dev.sdkforge.template.core/currentPlatform // dev.sdkforge.template.core/currentPlatform|{}currentPlatform[0]
+    final fun <get-currentPlatform>(): dev.sdkforge.template.core/Platform // dev.sdkforge.template.core/currentPlatform.<get-currentPlatform>|<get-currentPlatform>(){}[0]

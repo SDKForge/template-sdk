@@ -99,7 +99,7 @@ dependencies {
 
 3. **Run tests**:
    ```bash
-   ./gradlew lint ktlintCheck dependencyGuard apiCheck
+   ./gradlew lint ktlintCheck dependencyGuard checkLegacyAbi
    ```
 
 4. **Generate documentation**:

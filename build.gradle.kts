@@ -19,6 +19,7 @@ plugins {
     alias(libs.plugins.build.logic.library.kmp).apply(false)
     alias(libs.plugins.build.logic.library.android).apply(false)
     alias(libs.plugins.build.logic.library.publishing).apply(false)
+    alias(libs.plugins.build.logic.binary.validation).apply(false)
     // :app-shared / :shared-ui if present
     alias(libs.plugins.compose.multiplatform).apply(false)
     alias(libs.plugins.compose.compiler).apply(false)

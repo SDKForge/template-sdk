@@ -30,8 +30,8 @@ jobs:
       run: ./gradlew ktlintCheck
     - name: Run dependencyGuard
       run: ./gradlew dependencyGuard
-    - name: Run apiCheck
-      run: ./gradlew apiCheck
+    - name: Run checkLegacyAbi
+      run: ./gradlew checkLegacyAbi
     - name: Run koverHtmlReport
       run: ./gradlew koverHtmlReport
     - name: Run dokkaGenerate

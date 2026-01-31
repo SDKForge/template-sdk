@@ -53,7 +53,7 @@ Before contributing, please:
 
 3. **Run tests**:
    ```bash
-   ./gradlew lint ktlintCheck dependencyGuard apiCheck
+   ./gradlew lint ktlintCheck dependencyGuard checkLegacyAbi
    ```
 
 ## Project Structure

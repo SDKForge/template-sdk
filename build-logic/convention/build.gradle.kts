@@ -52,5 +52,9 @@ gradlePlugin {
             id = "dev.sdkforge.buildlogic.ktlint"
             implementationClass = "dev.sdkforge.buildlogic.KtLintPlugin"
         }
+        register("dev.sdkforge.buildlogic.binary.validation") {
+            id = "dev.sdkforge.buildlogic.binary.validation"
+            implementationClass = "dev.sdkforge.buildlogic.BinaryValidationPlugin"
+        }
     }
 }
