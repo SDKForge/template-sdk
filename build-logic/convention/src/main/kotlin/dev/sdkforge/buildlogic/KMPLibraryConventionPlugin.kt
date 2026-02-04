@@ -82,6 +82,8 @@ class KMPLibraryConventionPlugin : Plugin<Project> {
                     )
                 }
 
+                jvm()
+
                 listOf(
                     iosX64(),
                     iosArm64(),
