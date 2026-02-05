@@ -87,6 +87,7 @@ rootProject.name = "SDKForgeTemplate"
 include(":app-android")
 include(":app-desktop")
 include(":app-web")
+include(":app-wear")
 include(":app-shared")
 include(":shared")
 include(":shared-core")
