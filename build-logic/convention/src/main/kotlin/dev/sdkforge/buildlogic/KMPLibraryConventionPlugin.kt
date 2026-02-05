@@ -84,6 +84,15 @@ class KMPLibraryConventionPlugin : Plugin<Project> {
 
                 jvm()
 
+                js {
+                    browser()
+                    binaries.executable()
+                }
+                wasmJs {
+                    browser()
+                    binaries.executable()
+                }
+
                 listOf(
                     iosX64(),
                     iosArm64(),

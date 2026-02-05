@@ -1,3 +1,5 @@
+import org.jetbrains.compose.desktop.application.dsl.TargetFormat
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.compose.multiplatform)
@@ -21,5 +23,11 @@ kotlin {
 compose.desktop {
     application {
         mainClass = "MainKt"
+
+        nativeDistributions {
+            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+            packageName = "dev.sdkforge.template.desktop"
+            // packageVersion = providers.gradleProperty("publishing.version").get()
+        }
     }
 }
