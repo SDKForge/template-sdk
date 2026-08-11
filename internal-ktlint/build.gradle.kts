@@ -14,5 +14,5 @@ dependencies {
 
     testImplementation("com.pinterest.ktlint:ktlint-test:1.8.0")
 
-    testRuntimeOnly("org.slf4j:slf4j-simple:2.0.17")
+    testRuntimeOnly("org.slf4j:slf4j-simple:2.0.18")
 }

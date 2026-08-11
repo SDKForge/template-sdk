@@ -1,18 +1,18 @@
 [versions]
-agp = "9.2.0"
+agp = "9.3.1"
 kotlinxBrowser = "0.5.0"
-mavenPublishGradlePlugin = "0.36.0"
-kotlin = "2.3.20"
-compose = "1.11.2"
-composeMultiplatform = "1.11.0"
+mavenPublishGradlePlugin = "0.37.0"
+kotlin = "2.4.10"
+compose = "1.11.4"
+composeMultiplatform = "1.11.1"
 compose-material3 = "1.4.0"
 androidx-activityCompose = "1.13.0"
 binary-compatibility-validator = "0.18.1"
 dokka = "2.2.0"
 dependency-guard = "0.5.0"
-kover = "0.9.8"
-versions = "0.54.0"
-benchmark = "1.5.0-alpha06"
+kover = "0.9.9"
+versions = "0.61.0"
+benchmark = "1.5.0-beta01"
 runner = "1.7.0"
 junit = "1.3.0"
 junitVersion = "4.13.2"
@@ -47,7 +47,7 @@ binaryCompatibilityValidator = { id = "org.jetbrains.kotlinx.binary-compatibilit
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 dependency-guard = { id = "com.dropbox.dependency-guard", version.ref = "dependency-guard" }
 kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
-versions = { id = "com.github.ben-manes.versions", version.ref = "versions" }
+versions = { id = "io.github.ben-manes.versions", version.ref = "versions" }
 
 build-logic-root = { id = "dev.sdkforge.buildlogic.root" }
 build-logic-ktlint = { id = "dev.sdkforge.buildlogic.ktlint" }
