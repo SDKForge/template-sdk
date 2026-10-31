@@ -9,7 +9,7 @@ plugins {
 
 configure<LibraryExtension> {
     // TODO: benchmark gradle plugin is not AGP 9.0 compatible; remove on the update
-    compileSdk = 36 // Android 16 (API level 36)
+    compileSdk = 37 // Android 17 (API level 37)
 
     namespace = "dev.sdkforge.benchmark"
 

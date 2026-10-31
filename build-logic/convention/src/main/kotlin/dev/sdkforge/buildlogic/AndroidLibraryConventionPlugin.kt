@@ -38,9 +38,9 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
  * ## Configuration
  *
  * ### SDK Configuration
- * - **Compile SDK**: 36 (Android 14)
- * - **Minimum SDK**: 21 (Android 5.0 Lollipop)
- * - **Target SDK**: 36 (Android 14)
+ * - **Compile SDK**: 37 (Android 17)
+ * - **Minimum SDK**: 23 (Android 6.0 Marshmallow)
+ * - **Target SDK**: 37 (Android 17)
  *
  * ### Kotlin Configuration
  * - **JVM Target**: Java 21
@@ -76,7 +76,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
  * This plugin requires:
  * - Android Gradle Plugin
  * - Kotlin Android Plugin
- * - Android SDK with API level 36
+ * - Android SDK with API level 37
  * - Java 21 or later
  *
  * ## Reports Location
@@ -115,10 +115,10 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
 /**
  * Configures Android SDK versions for the library.
  *
- * Sets the compile SDK to 36 (Android 14) and minimum SDK to 21 (Android 5.0).
+ * Sets the compile SDK to 37 (Android 17) and minimum SDK to 21 (Android 5.0).
  */
 private fun KotlinMultiplatformExtension.configureSDK() = extensions.configure<KotlinMultiplatformAndroidLibraryExtension> {
-    compileSdk = 36 // Android 16 (API level 36)
+    compileSdk = 37 // Android 17 (API level 37)
 
     minSdk = 23     // Android 6.0 Marshmallow (API level 23)
 }
@@ -190,6 +190,6 @@ private fun KotlinMultiplatformExtension.configureLint() = extensions.configure<
         checkDependencies = true         // Analyze dependencies for issues
 
         // Library-specific configuration
-        targetSdk = 36                   // Target SDK for lint analysis (must be >= compile SDK)
+        targetSdk = 37                   // Target SDK for lint analysis (must be >= compile SDK)
     }
 }

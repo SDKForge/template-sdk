@@ -18,7 +18,7 @@ class NoTemplatePackageRuleTest {
         fun main() {
             androidLibrary {
                 namespace = "dev.sdkforge.template.android"
-                compileSdk = 36
+                compileSdk = 37
             }
         } 
         """.trimIndent()
